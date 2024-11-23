@@ -1,5 +1,5 @@
-import type { AppLoadContext } from "@remix-run/node";
-import { createRequestHandler } from "@remix-run/node";
+import type { AppLoadContext } from "react-router";
+import { createRequestHandler } from "react-router";
 import { Hono } from "hono";
 import { serve } from "@hono/node-server";
 import { cache } from "hono/cache";
@@ -38,6 +38,8 @@ app.use(
   })
 );
 
+console.log("isProduction", isProduction);
+
 app.use(async (c, next) => {
   await next();
   setCookie(c, "X-Powered-By", "Remix and Hono");
@@ -46,7 +48,9 @@ app.use(async (c, next) => {
 
 app.all("*", async (c) => {
   const build = await import(
-    isProduction ? "./build/server/remix.js" : "virtual:remix/server-build"
+    isProduction
+      ? "./build/server/remix.js"
+      : "virtual:react-router/server-build"
   );
   const handler = createRequestHandler(build, process.env.NODE_ENV);
   const remixContext = {

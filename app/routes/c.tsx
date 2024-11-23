@@ -1,7 +1,7 @@
-import { redirect, type MetaFunction } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
+import { redirect, type MetaFunction } from "react-router";
+import { useLoaderData } from "react-router";
 
-export const loader = () => {
+export const clientLoader = () => {
   return {
     omar: "omar",
   };

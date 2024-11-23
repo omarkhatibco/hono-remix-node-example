@@ -1,6 +1,6 @@
-import { redirect, type MetaFunction } from "@remix-run/node";
+import { redirect, type MetaFunction } from "react-router";
 
-export const loader = async (c) => {
+export const clientLoader = async (c) => {
   console.log(c);
 
   return redirect("/signin");
